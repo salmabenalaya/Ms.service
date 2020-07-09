@@ -7,6 +7,7 @@ namespace Poulina.GestionMs.Domain.Models
 {
     public class Demande_information
     {
+
         [Key]
         public Guid IdInf { get; set; }
 
