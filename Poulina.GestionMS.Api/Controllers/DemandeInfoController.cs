@@ -31,34 +31,35 @@ namespace Poulina.GestionMS.Api.Controllers
 
         #region Read Function
         // GET: api/Category
-        [HttpGet("GetListCategory")]
-        public async Task<IEnumerable<Demande_information>> GetListCategory() =>
+        [HttpGet("GetListDemandInfo")]
+        public async Task<IEnumerable<Demande_information>> GetListDemandInfo() =>
              await (new GetAllHandler<Demande_information>(repository)).Handle(new GetAllQuery<Demande_information>(condition: null, includes: null), new CancellationToken());
 
         // GET: api/Category/5
-        [HttpGet("GetCategory")]
-        public async Task<Demande_information> GetCategory(Guid id) =>
+        [HttpGet("GetDemandInfo")]
+        public async Task<Demande_information> GetDemandInfo(Guid id) =>
             await (new GetByIdHandler<Demande_information>(repository)).Handle(new GetQueryByID<Demande_information>(condition: x => x.IdInf.Equals(id), null), new CancellationToken());
         #endregion
 
         #region Add Function
         // POST: api/Category
-        [HttpPost("PostCategory")]
-        public async Task<Demande_information> PostCategory([FromBody] Demande_information Demand) =>
-            await (new AddHandler<Demande_information>(repository)).Handle(new AddGeneric<Demande_information>(Demand), new CancellationToken());
+        [HttpPost("PostDemandInfo")]
+        public async Task<Demande_information> PostDemandInfo([FromBody] Demande_information Demand) =>
+            await (new AddHandler<Demande_information>(repository))
+            .Handle(new AddGeneric<Demande_information>(Demand), new CancellationToken());
         #endregion
 
         #region Update Funtion
         // PUT: api/Category/5
-        [HttpPut("PutCategory")]
-        public async Task<Demande_information> PutCategory([FromBody] Demande_information category) =>
+        [HttpPut("PutDemandInfo")]
+        public async Task<Demande_information> PutDemandInfo([FromBody] Demande_information category) =>
            await (new PutHandler<Demande_information>(repository)).Handle(new PutGeneric<Demande_information>(category), new CancellationToken());
         #endregion
 
         #region Remove Function
         // DELETE: api/Category/5
-        [HttpDelete("DeleteCategory")]
-        public async Task<Demande_information> DeleteCategory(Guid id) =>
+        [HttpDelete("DeleteDemandInfo")]
+        public async Task<Demande_information> DeleteDemandInfo(Guid id) =>
            await (new DeleteHandler<Demande_information>(repository)).Handle(new DeleteGeneric<Demande_information>(id), new CancellationToken());
         #endregion
     }

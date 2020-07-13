@@ -11,7 +11,7 @@ namespace Poulina.GestionMs.Data.Repository
 {
   public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        //    private DbSet<T> table = null;
+        //  private DbSet<T> table = null;
         //    private readonly Context _context;
 
         //    public Repository(Context context)
@@ -44,7 +44,7 @@ namespace Poulina.GestionMs.Data.Repository
         //        return "Added done";
         //    }
 
-        //    public string Update(T entity)
+        //   public string Update(T entity)
         //    {
         //        _context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         //        _context.SaveChanges();

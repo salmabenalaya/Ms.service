@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Poulina.GestionMs.Data.Migrations
 {
-    public partial class tabl1 : Migration
+    public partial class tb1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,6 +24,8 @@ namespace Poulina.GestionMs.Data.Migrations
                 columns: table => new
                 {
                     IdInf = table.Column<Guid>(nullable: false),
+                    IdDomain = table.Column<Guid>(nullable: false),
+                    Titre = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false)
                 },

@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Poulina.GestionMs.Data;
 using Swashbuckle.AspNetCore.Swagger;
+using AutoMapper;
 
 namespace Poulina.GestionMS.Api
 {
@@ -33,6 +34,7 @@ namespace Poulina.GestionMS.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR(typeof(DependencyContrainer));
+            services.AddAutoMapper(typeof(Startup));
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddDbContext<Context>(opts => opts.UseSqlServer(Configuration.GetConnectionString("Commentaire")));
             RegisterService(services);

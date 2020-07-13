@@ -92,6 +92,10 @@ namespace Poulina.GestionMs.Data.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<Guid>("IdDomain");
+
+                    b.Property<string>("Titre");
+
                     b.HasKey("IdInf");
 
                     b.ToTable("demandes");

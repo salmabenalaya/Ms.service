@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Poulina.GestionMs.Domain.Commands;
+using Poulina.GestionMs.Domain.Dto;
 using Poulina.GestionMs.Domain.Handler;
 using Poulina.GestionMs.Domain.Interface;
 using Poulina.GestionMs.Domain.Models;
@@ -19,11 +22,15 @@ namespace Poulina.GestionMS.Api.Controllers
     public class CommentaireController : ControllerBase
     {
         private readonly IRepository<Commentaire> repository;
+        private readonly IMediator mediator;
+        private readonly IMapper mapper;
 
         #region Constructor
-        public CommentaireController(IRepository<Commentaire> repository)
+        public CommentaireController(IRepository<Commentaire> repository, IMediator mediator, IMapper mapper)
         {
             this.repository = repository;
+            this.mediator = mediator;
+            this.mapper = mapper;
 
         }
         #endregion
@@ -52,11 +59,11 @@ namespace Poulina.GestionMS.Api.Controllers
 
         #region Add Function
         // POST: api/Category
-        [HttpPost("PostCommentaire")]
-        public async Task<Commentaire> PostCommentaire([FromBody] Commentaire category) =>
-            await (new AddHandler<Commentaire>(repository)).Handle(new AddGeneric<Commentaire>(category), new CancellationToken());
+        [HttpPost("PostCommenataire")]
+        public async Task<Commentaire> PostCommenataire([FromBody] Commentaire comm) =>
+            await (new AddHandler<Commentaire>(repository))
+            .Handle(new AddGeneric<Commentaire>(comm), new CancellationToken());
         #endregion
-
         #region Update Funtion
         // PUT: api/Category/5
         [HttpPut("PutCommenataire")]
@@ -70,6 +77,16 @@ namespace Poulina.GestionMS.Api.Controllers
         public async Task<Commentaire> DeleteCommentaire(Guid id) =>
            await (new DeleteHandler<Commentaire>(repository)).Handle(new DeleteGeneric<Commentaire>(id), new CancellationToken());
         #endregion
+        [HttpGet("getCommentaireDto")]
+        public async Task<IEnumerable<CommentaireQuestionDto>> getCommentaireDto()
+        {
+
+            return mediator.Send(new GetAllQuery<Commentaire>
+                (condition: null, includes: a => a.Include(x => x.demande_Information))
+                ).Result.Select(v => mapper.Map<CommentaireQuestionDto>(v)
+              );
+        }
+
     }
 
 

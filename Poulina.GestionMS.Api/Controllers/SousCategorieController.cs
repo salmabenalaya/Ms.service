@@ -30,21 +30,21 @@ namespace Poulina.GestionMS.Api.Controllers
 
         #region Read Function
         // GET: api/Category
-        [HttpGet("GetListCategory")]
-        public async Task<IEnumerable<sous_categorie>> GetListCategory() =>
+        [HttpGet("GetListSousCategory")]
+        public async Task<IEnumerable<sous_categorie>> GetListSousCategory() =>
              await (new GetAllHandler<sous_categorie>(repository)).Handle(new GetAllQuery<sous_categorie>(condition: null, includes: null), new CancellationToken());
 
         #endregion
 
         #region Read Function1
-        [HttpGet("GetListCategory1")]
-        public async Task<IEnumerable<sous_categorie>> GetListCategory1(Guid id) =>
+        [HttpGet("GetListSousCategory1")]
+        public async Task<IEnumerable<sous_categorie>> GetListSousCategory1(Guid id) =>
              await (new GetAllHandler<sous_categorie>(repository)).Handle(new GetAllQuery<sous_categorie>(condition: x => x.IdSC.Equals(id), includes: null), new CancellationToken());
         #endregion
         #region Read Function2
         // GET: api/Category/5
-        [HttpGet("GetCategory")]
-        public async Task<sous_categorie> GetCategory(Guid id) =>
+        [HttpGet("GetSousCategory")]
+        public async Task<sous_categorie> GetSousCategory(Guid id) =>
             await (new GetByIdHandler<sous_categorie>(repository)).Handle(new GetQueryByID<sous_categorie>(condition: x => x.IdSC.Equals(id), null), new CancellationToken());
         #endregion
 
@@ -52,22 +52,23 @@ namespace Poulina.GestionMS.Api.Controllers
 
         #region Add Function
         // POST: api/Category
-        [HttpPost("PostCategory")]
-        public async Task<sous_categorie> PostCategory([FromBody] sous_categorie category) =>
-            await (new AddHandler<sous_categorie>(repository)).Handle(new AddGeneric<sous_categorie>(category), new CancellationToken());
+        [HttpPost("PostSousCategory")]
+        public async Task<sous_categorie> PostSousCategory([FromBody] sous_categorie category) =>
+            await (new AddHandler<sous_categorie>(repository))
+            .Handle(new AddGeneric<sous_categorie>(category), new CancellationToken());
         #endregion
 
         #region Update Funtion
         // PUT: api/Category/5
-        [HttpPut("PutCategory")]
-        public async Task<sous_categorie> PutCategory([FromBody] sous_categorie category) =>
+        [HttpPut("PutSousCategory")]
+        public async Task<sous_categorie> PutSousCategory([FromBody] sous_categorie category) =>
            await (new PutHandler<sous_categorie>(repository)).Handle(new PutGeneric<sous_categorie>(category), new CancellationToken());
         #endregion
 
         #region Remove Function
         // DELETE: api/Category/5
-        [HttpDelete("DeleteCategory")]
-        public async Task<sous_categorie> DeleteCategory(Guid id) =>
+        [HttpDelete("DeleteSousCategory")]
+        public async Task<sous_categorie> DeleteSousCategory(Guid id) =>
            await (new DeleteHandler<sous_categorie>(repository)).Handle(new DeleteGeneric<sous_categorie>(id), new CancellationToken());
         #endregion
     }

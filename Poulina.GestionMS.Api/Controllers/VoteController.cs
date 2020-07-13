@@ -52,16 +52,18 @@ namespace Poulina.GestionMS.Api.Controllers
 
         #region Add Function
         // POST: api/Category
-        [HttpPost("PostCategory")]
-        public async Task<Vote> PostCategory([FromBody] Vote category) =>
-            await (new AddHandler<Vote>(repository)).Handle(new AddGeneric<Vote>(category), new CancellationToken());
+        [HttpPost("Postvote")]
+        public async Task<Vote> Postvote([FromBody] Vote votes) =>
+            await (new AddHandler<Vote>(repository))
+            .Handle(new AddGeneric<Vote>(votes), new CancellationToken());
         #endregion
 
         #region Update Funtion
         // PUT: api/Category/5
-        [HttpPut("PutCategory")]
-        public async Task<Vote> PutCategory([FromBody] Vote category) =>
-           await (new PutHandler<Vote>(repository)).Handle(new PutGeneric<Vote>(category), new CancellationToken());
+        [HttpPut("Putvote")]
+        public async Task<Vote> Putvote([FromBody] Vote votes) =>
+           await (new PutHandler<Vote>(repository))
+            .Handle(new PutGeneric<Vote>(votes), new CancellationToken());
         #endregion
 
         #region Remove Function

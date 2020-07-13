@@ -10,8 +10,8 @@ using Poulina.GestionMs.Data;
 namespace Poulina.GestionMs.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200709130438_tabl1")]
-    partial class tabl1
+    [Migration("20200710163429_tb1")]
+    partial class tb1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,6 +93,10 @@ namespace Poulina.GestionMs.Data.Migrations
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Description");
+
+                    b.Property<Guid>("IdDomain");
+
+                    b.Property<string>("Titre");
 
                     b.HasKey("IdInf");
 
