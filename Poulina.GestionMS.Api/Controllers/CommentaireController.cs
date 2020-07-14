@@ -77,6 +77,8 @@ namespace Poulina.GestionMS.Api.Controllers
         public async Task<Commentaire> DeleteCommentaire(Guid id) =>
            await (new DeleteHandler<Commentaire>(repository)).Handle(new DeleteGeneric<Commentaire>(id), new CancellationToken());
         #endregion
+        #region getDTO Function
+
         [HttpGet("getCommentaireDto")]
         public async Task<IEnumerable<CommentaireQuestionDto>> getCommentaireDto()
         {
@@ -86,6 +88,7 @@ namespace Poulina.GestionMS.Api.Controllers
                 ).Result.Select(v => mapper.Map<CommentaireQuestionDto>(v)
               );
         }
+        #endregion
 
     }
 

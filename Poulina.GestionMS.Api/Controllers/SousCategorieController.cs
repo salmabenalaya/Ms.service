@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Poulina.GestionMs.Domain.Commands;
+using Poulina.GestionMs.Domain.Dto;
 using Poulina.GestionMs.Domain.Handler;
 using Poulina.GestionMs.Domain.Interface;
 using Poulina.GestionMs.Domain.Models;
@@ -19,15 +22,28 @@ namespace Poulina.GestionMS.Api.Controllers
     public class SousCategorieController : ControllerBase
     {
         private readonly IRepository<sous_categorie> repository;
-
+        private readonly IMediator mediator;
+        private readonly IMapper mapper;
         #region Constructor
-        public SousCategorieController(IRepository<sous_categorie> repository)
+        public SousCategorieController(IRepository<sous_categorie> repository, IMediator mediator, IMapper mapper)
         {
             this.repository = repository;
-
+            this.mediator = mediator;
+            this.mapper = mapper;
         }
         #endregion
+        #region getDTO Function
 
+        [HttpGet("getSousCategorieDto")]
+        public async Task<IEnumerable<SousCategorieQuestionDto>> getSousCategorieDto()
+        {
+
+            return mediator.Send(new GetAllQuery<sous_categorie>
+                (condition: null, includes: a => a.Include(x => x.Categorie))
+                ).Result.Select(v => mapper.Map<SousCategorieQuestionDto>(v)
+              );
+        }
+        #endregion
         #region Read Function
         // GET: api/Category
         [HttpGet("GetListSousCategory")]
